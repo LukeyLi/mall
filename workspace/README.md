@@ -1,1 +1,1 @@
-mmall_learning
+mymall 1.0

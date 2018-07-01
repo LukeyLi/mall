@@ -8,16 +8,14 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by geely
- */
+
 public class TokenCache {
 
     private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
 
     public static final String TOKEN_PREFIX = "token_";
 
-    //LRU算法
+    //Guava  缓存的最大容量10000.LRU算法（最小使用算法，移除缓存项），https://www.cnblogs.com/ProtectedDream/p/6932478.html
     private static LoadingCache<String,String> localCache = CacheBuilder.newBuilder().initialCapacity(1000).maximumSize(10000).expireAfterAccess(12, TimeUnit.HOURS)
             .build(new CacheLoader<String, String>() {
                 //默认的数据加载实现,当调用get取值的时候,如果key没有对应的值,就调用这个方法进行加载.

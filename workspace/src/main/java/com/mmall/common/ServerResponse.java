@@ -5,9 +5,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.io.Serializable;
 
-/**
- * Created by geely
- */
 @JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
 //保证序列化json的时候,如果是null的对象,key也会消失
 public class ServerResponse<T> implements Serializable {
@@ -23,6 +20,10 @@ public class ServerResponse<T> implements Serializable {
         this.status = status;
         this.data = data;
     }
+    private ServerResponse(int status,String msg){
+        this.status = status;
+        this.msg = msg;
+    }
 
     private ServerResponse(int status,String msg,T data){
         this.status = status;
@@ -30,10 +31,6 @@ public class ServerResponse<T> implements Serializable {
         this.data = data;
     }
 
-    private ServerResponse(int status,String msg){
-        this.status = status;
-        this.msg = msg;
-    }
 
     @JsonIgnore
     //使之不在json序列化结果当中
